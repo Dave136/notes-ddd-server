@@ -1,6 +1,10 @@
 import fastify from 'fastify';
+// import userRoute from '@modules/user/infrastructure/routes/user.route';
+import plugins from '../config/plugins';
+import env from '../config/env';
 
 const startServer = async () => {
+  env();
   const server = fastify();
 
   const port = process.env.PORT || 9091;
@@ -10,12 +14,15 @@ const startServer = async () => {
     return { message: 'Hello world! ' };
   });
 
+  server.register(plugins);
+  // server.register(userRoute);
+
   server.listen({ port: +port, host }, (err, address) => {
     if (err) {
       throw err;
     }
 
-    console.log(`🚀 Server ready at http://${address}`);
+    console.log(`🚀 Server ready at ${address}`);
   });
 };
 

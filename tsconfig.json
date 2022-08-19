@@ -6,8 +6,14 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["src/@types", "node_modules/@types"],
+    "paths": {
+      "@common/*": ["src/shared/common/*"],
+      "@infrastructure/*": ["src/shared/infrastructure/*"],
+      "@modules/*": ["src/modules/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "**/*.ts"],
   "exclude": ["node_modules"]
 }
