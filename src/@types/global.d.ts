@@ -12,6 +12,7 @@ declare namespace NodeJS {
     POSTGRES_PASSWORD: string;
     JWT_SECRET: string;
     JWT_EXPIRATION: string;
+    MONGO_URI: string;
   }
 }
 

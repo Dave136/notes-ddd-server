@@ -42,6 +42,10 @@ export default abstract class BaseController {
     return BaseController.response(reply, 201, '');
   }
 
+  public ok(reply: FastifyReply, message?: string): Reply {
+    return BaseController.response(reply, 200, message ?? '');
+  }
+
   public badRequest(reply: FastifyReply, message?: string): Reply {
     return BaseController.response(reply, 400, message ?? 'Bad request');
   }

@@ -16,6 +16,6 @@
  */
 export default interface Mapper<Domain, DTO, PersistenceLayer> {
   intoDTO(domain: Domain): DTO;
-  intoDomain(raw: Record<string, unknown>): Domain;
+  intoDomain(raw: Record<any, unknown>): Domain;
   intoPersistence(domain: Domain): PersistenceLayer;
 }

@@ -1,10 +1,11 @@
 import fastify from 'fastify';
-// import userRoute from '@modules/user/infrastructure/routes/user.route';
 import plugins from '../config/plugins';
 import env from '../config/env';
+import startDatabase from '@modules/user/infrastructure/database/mongo';
 
 const startServer = async () => {
-  env();
+  await env();
+  await startDatabase();
   const server = fastify();
 
   const port = process.env.PORT || 9091;
@@ -15,7 +16,6 @@ const startServer = async () => {
   });
 
   server.register(plugins);
-  // server.register(userRoute);
 
   server.listen({ port: +port, host }, (err, address) => {
     if (err) {

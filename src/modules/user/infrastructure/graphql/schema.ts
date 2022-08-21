@@ -6,6 +6,7 @@ import UserMapper from '../mapper';
 export const Schema = gql`
   type Query {
     users: [User]!
+    user(id: String!): User
   }
 
   type Mutation {
@@ -20,13 +21,26 @@ export const resolver = {
       _args: any,
       { actions }: { actions: Actions },
     ) => {
-      const users: any[] = [];
+      const users = await actions.useCase.user.findAll.execute();
 
       if (users.length === 0) {
         return [];
       }
 
       return users.map((user: UserEntity) => UserMapper.intoDTO(user));
+    },
+    user: async (
+      _root: any,
+      args: { id: string },
+      { actions }: { actions: Actions },
+    ) => {
+      const user = await actions.useCase.user.findUser.execute({ id: args.id });
+
+      if (!user) {
+        return null;
+      }
+
+      return UserMapper.intoDTO(user);
     },
   },
 };

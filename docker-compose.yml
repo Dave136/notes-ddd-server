@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  database:
+    image: 'mongo:5'
+    container_name: 'notes-database'
+    restart: 'always'
+    ports:
+      - 27017:27017
+    volumes:
+      - notes_database:/data/db
+    # env_file:
+    #   - .env
+
+volumes:
+  notes_database:
